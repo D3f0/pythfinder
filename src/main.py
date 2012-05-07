@@ -2,11 +2,10 @@
 # coding: utf-8
 from PyQt4 import QtCore, QtGui
 import sys
+from gui.app import PythFinderApp
 
 def main(argv = sys.argv):
-    app = QtGui.QApplication(argv)
-    win = QtGui.QMainWindow()
-    win.show()
+    app = PythFinderApp(argv)
     return app.exec_()
 
 
