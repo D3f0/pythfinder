@@ -12,5 +12,7 @@ class PythFinderApp(QtGui.QApplication):
         self.mainWindow = PythfinderMainWindow()
         
     
+        
+    
     
     
