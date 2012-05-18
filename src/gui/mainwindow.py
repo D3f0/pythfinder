@@ -2,6 +2,7 @@
 
 from PyQt4 import QtCore, QtGui, uic
 from os import path
+
 from networkoptions import NetworkOptionsDialog
 
 class PythfinderMainWindow(QtGui.QMainWindow):

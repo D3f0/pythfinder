@@ -41,7 +41,8 @@ def _check_path_is_package(dirpath):
     assert path.isdir(dirpath)
     dirs = filter(bool, dirpath.split(path.sep))
     for n in range(len(dirs)):
-        target = path.join(dirs[:n] + ['__init__.py'])
+        bits = dirs[:n] + ['__init__.py']
+        target = path.join(*bits)
         if not path.exists(target):
             with open(target, 'w') as f:
                 pass
@@ -53,22 +54,35 @@ def _compile_ui(source, dest):
     destdir = path.dirname(dest)
     if not path.exists(destdir):
         os.makedirs(destdir)
-    _check_path_is_package(destdir)
-    local('{PYRCC} {SOURCE} -o {DEST}'.format(
-                                               SOURCE = source,
-                                               DEST = dest,
-                                               PYRCC = PYRCC
+    _check_path_is_package(path.relpath(destdir, os.getcwd()))
+                           
+    local('{PYRCC} {SOURCE} -o {DEST}'.format(SOURCE = source,
+                                              DEST = dest,
+                                              PYRCC = PYRCC
                                                ))
+
+def _ui_dest_callback(basepath, filename):
+    barename, _ = path.splitext(filename) # aaa.bb -> barename = aaa, _ = bb 
+    filename = "ui_%s.py" % barename
+    return path.abspath(path.join(UI_TARGET_DIR, basepath, filename))
     
 def ui():
     """Compile resources"""
     from os.path import splitext, join, abspath, dirname
-    def dest_callback(basepath, filename):
-        barename, _ = splitext(filename) # aaa.bb -> barename = aaa, _ = bb 
-        filename = "ui_%s.py" % barename
-        return abspath(join(UI_TARGET_DIR, basepath, filename))
+    total = counter = 0
     
-    for source, dest in _iter_ui_py_rules(UI_DIRECTORY, dest_callback):
+    for source, dest in _iter_ui_py_rules(UI_DIRECTORY, _ui_dest_callback):
+        total += 1
         if _is_older_file(source, dest):
             _compile_ui(source, dest)
+            counter += 1
+    if not counter:
+        print "Everything up to date ({} files)".format(total)
+    else:
+        print "{} files compiled from {}".format(counter, total) 
+        
+def clean_ui():
+    """ Quita todos los UI compilados"""
+    import shutil
+    shutil.rmtree(UI_TARGET_DIR, True)
         
