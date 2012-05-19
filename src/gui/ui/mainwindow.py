@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'resources/ui/mainwindow.ui'
 #
-# Created: Fri May 18 20:56:38 2012
+# Created: Fri May 18 22:22:59 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -35,6 +35,20 @@ class Ui_MainWindow(object):
         self.webView.setUrl(QtCore.QUrl(_fromUtf8("about:blank")))
         self.webView.setObjectName(_fromUtf8("webView"))
         self.verticalLayout_2.addWidget(self.webView)
+        self.horizontalLayout = QtGui.QHBoxLayout()
+        self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
+        self.label = QtGui.QLabel(self.scrollAreaWidgetContents)
+        self.label.setObjectName(_fromUtf8("label"))
+        self.horizontalLayout.addWidget(self.label)
+        self.comboMapType = QtGui.QComboBox(self.scrollAreaWidgetContents)
+        self.comboMapType.setObjectName(_fromUtf8("comboMapType"))
+        self.horizontalLayout.addWidget(self.comboMapType)
+        spacerItem = QtGui.QSpacerItem(40, 20, QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Minimum)
+        self.horizontalLayout.addItem(spacerItem)
+        self.pushSnapshot = QtGui.QPushButton(self.scrollAreaWidgetContents)
+        self.pushSnapshot.setObjectName(_fromUtf8("pushSnapshot"))
+        self.horizontalLayout.addWidget(self.pushSnapshot)
+        self.verticalLayout_2.addLayout(self.horizontalLayout)
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         self.verticalLayout.addWidget(self.scrollArea)
         MainWindow.setCentralWidget(self.centralwidget)
@@ -69,6 +83,8 @@ class Ui_MainWindow(object):
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "MainWindow", None, QtGui.QApplication.UnicodeUTF8))
+        self.label.setText(QtGui.QApplication.translate("MainWindow", "Map Type", None, QtGui.QApplication.UnicodeUTF8))
+        self.pushSnapshot.setText(QtGui.QApplication.translate("MainWindow", "Snapshot", None, QtGui.QApplication.UnicodeUTF8))
         self.menuFile.setTitle(QtGui.QApplication.translate("MainWindow", "File", None, QtGui.QApplication.UnicodeUTF8))
         self.menuOptions.setTitle(QtGui.QApplication.translate("MainWindow", "Options", None, QtGui.QApplication.UnicodeUTF8))
         self.menuHelp.setTitle(QtGui.QApplication.translate("MainWindow", "Help", None, QtGui.QApplication.UnicodeUTF8))

@@ -11,28 +11,39 @@
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
 	</script>
 	<script>
-		$(function (){
+		// Douglas Crockford's module pattern
+		MAPS = (function (){
+			var map,
+				center,
+				mapOptions;
+			function init () {
+				map = $('#mapa').get(0);  
+				center = new google.maps.LatLng( -43.2663200697085, -65.3104146197085);
+				mapOptions = {
+	    			zoom: 6,
+    				mapTypeId: google.maps.MapTypeId.ROADMAP,
+    				center: center,
+				    disableDefaultUI: true
+  				};
+  				mapa = new google.maps.Map(mapa, mapOptions)
+				/*
+				var marker = new google.maps.Marker({
+  					position: center,
+  					map: map,
+  					title: "Punto",
+  					draggable: true
+  				});
+  				
+  				*/
+			} // Fin init
+			$(init); // Carga de pagina
 			
-			var mapa = $('#mapa').get(0);
-			var center = new google.maps.LatLng( -43.2663200697085, -65.3104146197085);
-
-			var myOptions = {
-    			zoom: 6,
-    			mapTypeId: google.maps.MapTypeId.ROADMAP,
-    			center: center,
-			    disableDefaultUI: true
-
-  			};
-  			var map = new google.maps.Map(mapa, myOptions);
-  			var marker = new google.maps.Marker({
-  				position: center,
-  				map: map,
-  				title: "Punto",
-  				draggable: true
-  			});
-  			
-		});
-	</script>
+			// Cosas publicas
+			return {
+				map: map
+			}
+		})();
+		</script>
 	</head>
 	<body>
 		<div style="width: 100%; height:100%" id="mapa">
