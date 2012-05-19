@@ -1,0 +1,42 @@
+<html>
+	<head>
+	<style>
+		BODY {
+			padding: 0px;
+			margin: 0px;
+		}
+	</style>	
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3.1&sensor=false">
+	</script>
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js">
+	</script>
+	<script>
+		$(function (){
+			
+			var mapa = $('#mapa').get(0);
+			var center = new google.maps.LatLng( -43.2663200697085, -65.3104146197085);
+
+			var myOptions = {
+    			zoom: 6,
+    			mapTypeId: google.maps.MapTypeId.ROADMAP,
+    			center: center,
+			    disableDefaultUI: true
+
+  			};
+  			var map = new google.maps.Map(mapa, myOptions);
+  			var marker = new google.maps.Marker({
+  				position: center,
+  				map: map,
+  				title: "Punto",
+  				draggable: true
+  			});
+  			
+		});
+	</script>
+	</head>
+	<body>
+		<div style="width: 100%; height:100%" id="mapa">
+
+		</div>
+	</body>
+</html>

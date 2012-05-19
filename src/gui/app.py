@@ -5,13 +5,15 @@ class PythFinderApp(QtGui.QApplication):
         super(PythFinderApp, self).__init__(args)
         self.setupGui()
         self.mainWindow.show()
-        self.mainWindow.webView.setUrl(QtCore.QUrl('http://maps.google.com'))
         
     def setupGui(self):
         from mainwindow import PythfinderMainWindow
         self.mainWindow = PythfinderMainWindow()
         
-    
+    def getTemplatePath(self):
+        import os
+        path = os.path.dirname(__file__)
+        return os.path.abspath(os.path.join(path, '..', 'templates'))
         
     
     
