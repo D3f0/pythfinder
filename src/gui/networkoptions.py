@@ -1,18 +1,15 @@
 from PyQt4 import QtGui, QtCore 
 from PyQt4 import uic
 from os import path
+from ui.config.networkconfig import Ui_NetworkConfigDialog 
 
 
-class NetworkOptionsDialog(QtGui.QDialog):
+class NetworkOptionsDialog(QtGui.QDialog, Ui_NetworkConfigDialog):
     def __init__(self, parent = None):
         super(NetworkOptionsDialog, self).__init__(parent = parent)
-        self.setupUi()
+        self.setupUi(self)
         self.loadConfig()
         QtGui.QApplication.instance().aboutToQuit.connect(self.saveConfig)
-        
-    def setupUi(self):
-        uifile = path.join(path.dirname(__file__), 'ui_files', 'networkconfig.ui')
-        uic.loadUi(uifile, self)
     
     def loadConfig(self):
         pass

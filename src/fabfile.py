@@ -8,7 +8,7 @@ from fabric.api import *
 
 UI_DIRECTORY = 'resources/ui'
 UI_TARGET_DIR = 'gui/ui'
-PYRCC = '/usr/bin/pyuic'
+PYRCC = '/usr/bin/pyuic4'
 
 from os import path
 
@@ -63,7 +63,7 @@ def _compile_ui(source, dest):
 
 def _ui_dest_callback(basepath, filename):
     barename, _ = path.splitext(filename) # aaa.bb -> barename = aaa, _ = bb 
-    filename = "ui_%s.py" % barename
+    filename = "%s.py" % barename
     return path.abspath(path.join(UI_TARGET_DIR, basepath, filename))
     
 def ui():

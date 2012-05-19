@@ -2,21 +2,17 @@
 
 from PyQt4 import QtCore, QtGui, uic
 from os import path
-
+from ui.mainwindow import Ui_MainWindow
 from networkoptions import NetworkOptionsDialog
 
-class PythfinderMainWindow(QtGui.QMainWindow):
+class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
         super(PythfinderMainWindow, self).__init__()
         # Cargar la interfase gráfica
-        self.setupUi()
+        self.setupUi(self)
         self.connectSignals()
-        
+    
     def connectSignals(self):
-        self.actionNetwork_Options.triggered.connect(self.networkOptionsDialog.exec_)
+        pass
+    
         
-        
-    def setupUi(self):
-        uifile = path.join(path.dirname(__file__), 'ui_files', 'mainwindow.ui')
-        uic.loadUi(uifile, self)
-        self.networkOptionsDialog = NetworkOptionsDialog()
