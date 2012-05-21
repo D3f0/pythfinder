@@ -19,6 +19,7 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.connectSignals()
         self.setupBrowser()
+        self.updateTitleWithSize()
         
         
     MAP_TYPES = OrderedDict(
@@ -31,7 +32,7 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def connectSignals(self):
         self.actionNetwork_Options.triggered.connect(self.networkOptionsDialog.exec_)
         self.networkOptionsDialog.accepted.connect(self.applyProxyParams)
-        
+        self.pushSnapshot.pressed.connect(self.takeSnapshot)
     
     def setupUi(self, instance):
         super(PythfinderMainWindow, self).setupUi(instance)
@@ -43,6 +44,10 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def setupBrowser(self):
         self.webView.setPage(ChromUserAgentPage())
         self.webView.setHtml(self.getInitialHTML())
+        self.webView.loadStarted.connect(lambda : self.statusBar().showMessage("Cargando..."))
+        self.webView.loadProgress[int].connect(lambda progress :self.statusBar().showMessage("Cargando %d" % progress))
+        self.webView.loadFinished.connect(lambda :self.statusBar().showMessage("Carga completada."))
+        
         
     def getInitialHTML(self):
         template = os.path.join(QtGui.qApp.instance().getTemplatePath(),
@@ -71,8 +76,9 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     def refreshWebView(self):
         ''' Refrescar '''
+        
         self.webView.setHtml(self.getInitialHTML())
-    
+        
     def applyProxyParams(self):
         dlg = self.networkOptionsDialog
         
@@ -95,5 +101,23 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         QtNetwork.QNetworkProxy.setApplicationProxy( proxy )
         
         self.refreshWebView()
+    
+    @QtCore.pyqtSignature('')
+    def takeSnapshot(self):
+        '''Tomar la captura de pantalla'''
+        f = QtGui.QFileDialog.getOpenFileName(self, "Guardar imagen", "", 
+                                          "Images (*.png *.jpg *.xpm)")
         
-        
+        if f:
+            if os.path.splitext(f)[1] not in ('png', 'jpg', 'xpm'):
+                f = f + '.png'
+            snapshot = QtGui.QPixmap.grabWidget(self.webView)
+            snapshot.save(f)
+    
+    def updateTitleWithSize(self):
+        webview_size = self.webView.size()
+        self.setWindowTitle(u"Tamaño %sx%s" % (webview_size.width(), webview_size.height()))
+    
+    def resizeEvent(self, event):
+        self.updateTitleWithSize()
+        super(PythfinderMainWindow, self).resizeEvent(event)
