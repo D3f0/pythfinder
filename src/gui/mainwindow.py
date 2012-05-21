@@ -19,13 +19,13 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         self.connectSignals()
         self.setupBrowser()
-        self.updateTitleWithSize()
+        
         
         
     MAP_TYPES = OrderedDict(
-        HYBRID = 'HYBRID',
         ROADMAP = 'ROADMAP',
         SATELLITE = 'SATELLITE',
+        HYBRID = 'HYBRID',
         TERRAIN = 'TERRAIN',
     )
     
@@ -59,7 +59,9 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     
     @PyQt4.QtCore.pyqtSignature('int')
     def on_comboMapType_activated(self, index):
-        print self.comboMapType.itemData(index)
+        mapTypeStr = self.comboMapType.itemData(index)
+        self.statusBar().showMessage("Estableciendo tipo %s" % mapTypeStr, 1000)
+        self.setMapTypeId(mapTypeStr)
     
     def setMapTypeId(self, mapType):
         self.processJS('MAP.setMapTypeId(google.maps.MapTypeId.%s);' % mapType)
@@ -121,3 +123,7 @@ class PythfinderMainWindow(QtGui.QMainWindow, Ui_MainWindow):
     def resizeEvent(self, event):
         self.updateTitleWithSize()
         super(PythfinderMainWindow, self).resizeEvent(event)
+        
+    def showEvent(self, event):
+        super(PythfinderMainWindow, self).showEvent(event)
+        self.updateTitleWithSize()
