@@ -10,7 +10,7 @@ class NetworkOptionsDialog(QtGui.QDialog, Ui_NetworkConfigDialog):
         self.setupUi(self)
         self.loadConfig()
         QtGui.QApplication.instance().aboutToQuit.connect(self.saveConfig)
-    
+        
     def loadConfig(self):
         pass
     

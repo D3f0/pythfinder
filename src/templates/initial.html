@@ -12,37 +12,26 @@
 	</script>
 	<script>
 		// Douglas Crockford's module pattern
-		MAPS = (function (){
-			var map,
-				center,
-				mapOptions;
-			function init () {
-				map = $('#mapa').get(0);  
-				center = new google.maps.LatLng( -43.2663200697085, -65.3104146197085);
-				mapOptions = {
-	    			zoom: 6,
-    				mapTypeId: google.maps.MapTypeId.ROADMAP,
-    				center: center,
-				    disableDefaultUI: true
-  				};
-  				mapa = new google.maps.Map(mapa, mapOptions)
-				/*
-				var marker = new google.maps.Marker({
-  					position: center,
-  					map: map,
-  					title: "Punto",
-  					draggable: true
-  				});
-  				
-  				*/
-			} // Fin init
-			$(init); // Carga de pagina
+		$(function (){
+			var divMap = $('#mapa').get(0);  
+			var center = new google.maps.LatLng( -43.2663200697085, -65.3104146197085);
+			var mapOptions = {
+    			zoom: 6,
+				mapTypeId: google.maps.MapTypeId.ROADMAP,
+				center: center,
+			    disableDefaultUI: true
+			};
+			MAP = new google.maps.Map(divMap, mapOptions);
+			/*
+			var marker = new google.maps.Marker({
+				position: center,
+				map: map,
+				title: "Punto",
+				draggable: true
+			});
 			
-			// Cosas publicas
-			return {
-				map: map
-			}
-		})();
+			*/
+			});
 		</script>
 	</head>
 	<body>

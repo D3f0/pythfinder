@@ -52,7 +52,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="lineProxyHost"/>
       </item>
       <item>
        <widget class="QLabel" name="label_2">
@@ -62,7 +62,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QSpinBox" name="spinBox">
+       <widget class="QSpinBox" name="spinPort">
         <property name="minimum">
          <number>1</number>
         </property>
@@ -78,7 +78,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="checkAuth">
      <property name="enabled">
       <bool>false</bool>
      </property>
@@ -104,7 +104,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
+       <widget class="QLineEdit" name="lineUser"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_4">
@@ -114,7 +114,11 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
+       <widget class="QLineEdit" name="linePass">
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
@@ -166,7 +170,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>checkBox</sender>
+   <sender>checkAuth</sender>
    <signal>toggled(bool)</signal>
    <receiver>groupBox</receiver>
    <slot>setEnabled(bool)</slot>
@@ -200,7 +204,7 @@
   <connection>
    <sender>radioManual</sender>
    <signal>toggled(bool)</signal>
-   <receiver>checkBox</receiver>
+   <receiver>checkAuth</receiver>
    <slot>setEnabled(bool)</slot>
    <hints>
     <hint type="sourcelabel">

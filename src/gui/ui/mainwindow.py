@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'resources/ui/mainwindow.ui'
 #
-# Created: Fri May 18 22:22:59 2012
+# Created: Fri May 18 22:35:35 2012
 #      by: PyQt4 UI code generator 4.9.1
 #
 # WARNING! All changes made in this file will be lost!
@@ -31,10 +31,20 @@ class Ui_MainWindow(object):
         self.scrollAreaWidgetContents.setObjectName(_fromUtf8("scrollAreaWidgetContents"))
         self.verticalLayout_2 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_2.setObjectName(_fromUtf8("verticalLayout_2"))
-        self.webView = QtWebKit.QWebView(self.scrollAreaWidgetContents)
+        self.scrollArea_2 = QtGui.QScrollArea(self.scrollAreaWidgetContents)
+        self.scrollArea_2.setWidgetResizable(True)
+        self.scrollArea_2.setObjectName(_fromUtf8("scrollArea_2"))
+        self.scrollAreaWidgetContents_2 = QtGui.QWidget()
+        self.scrollAreaWidgetContents_2.setGeometry(QtCore.QRect(0, 0, 593, 328))
+        self.scrollAreaWidgetContents_2.setObjectName(_fromUtf8("scrollAreaWidgetContents_2"))
+        self.verticalLayout_3 = QtGui.QVBoxLayout(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_3.setObjectName(_fromUtf8("verticalLayout_3"))
+        self.webView = QtWebKit.QWebView(self.scrollAreaWidgetContents_2)
         self.webView.setUrl(QtCore.QUrl(_fromUtf8("about:blank")))
         self.webView.setObjectName(_fromUtf8("webView"))
-        self.verticalLayout_2.addWidget(self.webView)
+        self.verticalLayout_3.addWidget(self.webView)
+        self.scrollArea_2.setWidget(self.scrollAreaWidgetContents_2)
+        self.verticalLayout_2.addWidget(self.scrollArea_2)
         self.horizontalLayout = QtGui.QHBoxLayout()
         self.horizontalLayout.setObjectName(_fromUtf8("horizontalLayout"))
         self.label = QtGui.QLabel(self.scrollAreaWidgetContents)
